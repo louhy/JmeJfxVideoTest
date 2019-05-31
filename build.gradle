@@ -1,0 +1,45 @@
+plugins {
+    id "java"
+    id "jacoco"
+    id "application"
+    id "org.openjfx.javafxplugin" version "0.0.7"
+}
+
+repositories {
+    jcenter()
+    mavenLocal()
+    mavenCentral()
+    maven { url "http://dl.bintray.com/jmonkeyengine/com.jme3" }
+}
+
+sourceCompatibility = 11
+
+mainClassName = 'test.JmeJfxVideoTest'
+
+def jme3 = [v: '3.3.0-SNAPSHOT', g: 'org.jmonkeyengine']
+dependencies {    
+    implementation "${jme3.g}:jme3-core:${jme3.v}"
+    implementation "${jme3.g}:jme3-desktop:${jme3.v}"
+    implementation "${jme3.g}:jme3-lwjgl3:${jme3.v}"
+    implementation "${jme3.g}:jme3-bullet:${jme3.v}"
+    implementation "${jme3.g}:jme3-bullet-native:${jme3.v}"
+    implementation "${jme3.g}:jme3-blender:${jme3.v}"
+    implementation "com.jayfella:jme-jfx-11:1.1.0"
+    implementation "org.openjfx:javafx-media:11.0.2"
+}
+
+javafx {
+    version = '11.0.2'
+    modules = ['javafx.controls', 'javafx.fxml', 'javafx.media']
+}
+
+compileJava {
+    options.compilerArgs << "-Xlint:unchecked"
+}
+
+run {
+    doFirst {
+        jvmArgs = [
+        ]
+    }
+}
